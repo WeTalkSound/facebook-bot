@@ -14,7 +14,7 @@ class SaluteConversers extends Command
      *
      * @var string
      */
-    protected $signature = 'conversers:salute';
+    protected $signature = 'conversers:salute {--c|converser=}';
 
     /**
      * The console command description.
@@ -49,7 +49,11 @@ class SaluteConversers extends Command
     {
         $this->service = $service;
 
-        $conversers = Converser::get();
+        $conversers = $this->option('converser') ? 
+                      Converser::whereIn('id', [$this->option('converser')]): 
+                      Converser::query();
+
+        $conversers = $conversers->get();
 
         $conversers->map([$this, "salute"]);
 
