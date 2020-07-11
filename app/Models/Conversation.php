@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Conversation extends Model
 {
-    use HasMeta;
 
     protected $fillable = ["converser_id", "actor", "refering_actor"];
 
